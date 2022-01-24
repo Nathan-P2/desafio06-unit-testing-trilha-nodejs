@@ -1,3 +1,4 @@
+import "reflect-metadata"
 import { inject, injectable } from "tsyringe";
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
@@ -22,7 +23,7 @@ export class AuthenticateUserUseCase {
 
   async execute({ email, password }: IRequest): Promise<IAuthenticateUserResponseDTO> {
     const user = await this.usersRepository.findByEmail(email);
-
+    
     if(!user) {
       throw new IncorrectEmailOrPasswordError();
     }
